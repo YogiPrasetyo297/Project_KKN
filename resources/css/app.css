@@ -1,3 +1,47 @@
 @tailwind base;
 @tailwind components;
+
+/* ========== Custom Components (Optional) ========== */
+@layer components {
+  .btn {
+    @apply inline-block px-4 py-2 rounded text-white font-semibold transition;
+  }
+
+  .btn-primary {
+    @apply btn bg-blue-600 hover:bg-blue-700;
+  }
+
+  .btn-danger {
+    @apply btn bg-red-600 hover:bg-red-700;
+  }
+
+  .btn-success {
+    @apply btn bg-green-600 hover:bg-green-700;
+  }
+
+  .card {
+    @apply bg-white rounded shadow p-4;
+  }
+
+  .form-input {
+    @apply w-full px-3 py-2 border border-gray-300 rounded;
+  }
+
+  .form-label {
+    @apply block text-sm font-medium text-gray-700 mb-1;
+  }
+
+  .table {
+    @apply w-full table-auto border border-gray-200;
+  }
+
+  .table th {
+    @apply bg-gray-100 text-left px-4 py-2;
+  }
+
+  .table td {
+    @apply px-4 py-2 border-t;
+  }
+}
+
 @tailwind utilities;

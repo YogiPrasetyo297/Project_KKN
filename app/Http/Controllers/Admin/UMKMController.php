@@ -4,62 +4,82 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\UMKM;
 
 class UMKMController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Tampilkan semua data UMKM.
      */
     public function index()
     {
-        //
+        $umkm = UMKM::all();
+        return view('admin.umkm.index', compact('umkm'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Tampilkan form tambah UMKM.
      */
     public function create()
     {
-        //
+        return view('admin.umkm.create');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Simpan data UMKM baru ke database.
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'pemilik' => 'required|string|max:255',
+            'kategori' => 'required|string|max:255',
+        ]);
+
+        UMKM::create([
+            'nama' => $request->nama,
+            'pemilik' => $request->pemilik,
+            'kategori' => $request->kategori,
+            'status' => 'Menunggu', // default
+        ]);
+
+        return redirect()->route('umkm.index')->with('success', 'Data UMKM berhasil ditambahkan.');
     }
 
     /**
-     * Display the specified resource.
+     * Tampilkan form edit UMKM.
      */
-    public function show(string $id)
+    public function edit(UMKM $umkm)
     {
-        //
+        return view('admin.umkm.edit', compact('umkm'));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Update data UMKM.
      */
-    public function edit(string $id)
+    public function update(Request $request, UMKM $umkm)
     {
-        //
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'pemilik' => 'required|string|max:255',
+            'kategori' => 'required|string|max:255',
+        ]);
+
+        $umkm->update([
+            'nama' => $request->nama,
+            'pemilik' => $request->pemilik,
+            'kategori' => $request->kategori,
+        ]);
+
+        return redirect()->route('umkm.index')->with('success', 'Data UMKM berhasil diperbarui.');
     }
 
     /**
-     * Update the specified resource in storage.
+     * Hapus data UMKM.
      */
-    public function update(Request $request, string $id)
+    public function destroy(UMKM $umkm)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $umkm->delete();
+        return redirect()->route('umkm.index')->with('success', 'Data UMKM berhasil dihapus.');
     }
 }

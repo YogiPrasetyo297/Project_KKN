@@ -5,38 +5,34 @@
 @section('content')
     <h1 class="text-2xl font-bold mb-4">Data Produk</h1>
 
-    <a href="{{ route('produk.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded mb-4 inline-block">+ Tambah Produk</a>
+    <a href="{{ route('produk.create') }}" class="btn-primary mb-4 inline-block">+ Tambah Produk</a>
 
-    <table class="w-full table-auto border border-gray-300">
+    <table class="table">
         <thead>
-            <tr class="bg-gray-100">
+            <tr>
                 <th>No</th>
-                <th>Nama</th>
+                <th>Nama Produk</th>
+                <th>Deskripsi</th>
                 <th>Harga</th>
-                <th>Foto</th>
                 <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($produks as $index => $produk)
-                <tr>
-                    <td class="border px-2">{{ $index + 1 }}</td>
-                    <td class="border px-2">{{ $produk->nama }}</td>
-                    <td class="border px-2">Rp{{ number_format($produk->harga) }}</td>
-                    <td class="border px-2">
-                        @if($produk->foto)
-                            <img src="{{ asset('storage/' . $produk->foto) }}" alt="foto" class="h-16">
-                        @endif
-                    </td>
-                    <td class="border px-2">
-                        <a href="{{ route('produk.edit', $produk->id) }}" class="text-blue-500">Edit</a>
-                        <form action="{{ route('produk.destroy', $produk->id) }}" method="POST" class="inline"
-                              onsubmit="return confirm('Yakin hapus?')">
-                            @csrf @method('DELETE')
-                            <button type="submit" class="text-red-500 ml-2">Hapus</button>
-                        </form>
-                    </td>
-                </tr>
+            @foreach($produk as $index => $data)
+            <tr>
+                <td>{{ $index + 1 }}</td>
+                <td>{{ $data->nama }}</td>
+                <td>{{ $data->deskripsi }}</td>
+                <td>Rp {{ number_format($data->harga, 0, ',', '.') }}</td>
+                <td>
+                    <a href="{{ route('produk.edit', $data->id) }}" class="btn-success text-sm">Edit</a>
+                    <form action="{{ route('produk.destroy', $data->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Hapus data ini?')">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn-danger text-sm">Hapus</button>
+                    </form>
+                </td>
+            </tr>
             @endforeach
         </tbody>
     </table>

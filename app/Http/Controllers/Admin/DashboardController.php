@@ -11,13 +11,10 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $totalUMKM = UMKM::count();
-        $totalProduk = Produk::count();
-        $totalAspirasi = Aspirasi::count();
-        $umkmTerbaru = UMKM::latest()->take(5)->get();
-
-        return view('admin.dashboard', compact(
-            'totalUMKM', 'totalProduk', 'totalAspirasi', 'umkmTerbaru'
-        ));
+        return view('admin.dashboard', [
+            'jumlahUmkm' => UMKM::count(),
+            'jumlahAspirasi' => Aspirasi::count(),
+            'jumlahProduk' => Produk::count(),
+        ]);
     }
 }

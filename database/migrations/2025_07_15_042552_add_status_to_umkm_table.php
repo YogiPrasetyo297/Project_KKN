@@ -11,14 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-    Schema::create('aspirasis', function (Blueprint $table) {
-        $table->id();
-        $table->string('nama');
-        $table->string('kontak'); // email atau no telepon
-        $table->text('aspirasi');
-        $table->timestamps();
-});
-
+        Schema::table('umkm', function (Blueprint $table) {
+            //
+        });
     }
 
     /**
@@ -26,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('aspirasis');
+        Schema::table('umkm', function (Blueprint $table) {
+            //
+        });
     }
 };

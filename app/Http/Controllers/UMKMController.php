@@ -7,51 +7,59 @@ use Illuminate\Http\Request;
 
 class UMKMController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
-        $umkms = UMKM::all();
-        return view('admin.umkm.index', compact('umkms'));
+        //
     }
 
+    /**
+     * Show the form for creating a new resource.
+     */
     public function create()
     {
-        return view('admin.umkm.create');
+        //
     }
 
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
-        $request->validate([
-            'nama' => 'required',
-            'pemilik' => 'required',
-            'kategori' => 'required',
-        ]);
-
-        UMKM::create($request->all());
-
-        return redirect()->route('umkm.index')->with('success', 'Data UMKM berhasil ditambahkan.');
+        //
     }
 
-    public function edit(UMKM $umkm)
+    /**
+     * Display the specified resource.
+     */
+    public function show(UMKM $uMKM)
     {
-        return view('admin.umkm.edit', compact('umkm'));
+        //
     }
 
-    public function update(Request $request, UMKM $umkm)
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(UMKM $uMKM)
     {
-        $request->validate([
-            'nama' => 'required',
-            'pemilik' => 'required',
-            'kategori' => 'required',
-        ]);
-
-        $umkm->update($request->all());
-
-        return redirect()->route('umkm.index')->with('success', 'Data UMKM berhasil diupdate.');
+        //
     }
 
-    public function destroy(UMKM $umkm)
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, UMKM $uMKM)
     {
-        $umkm->delete();
-        return redirect()->route('umkm.index')->with('success', 'Data UMKM berhasil dihapus.');
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(UMKM $uMKM)
+    {
+        //
     }
 }

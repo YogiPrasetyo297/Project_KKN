@@ -3,13 +3,24 @@
 @section('title', 'Edit UMKM')
 
 @section('content')
-    <h1 class="text-2xl font-bold mb-4">Edit Data UMKM</h1>
+    <h1 class="text-xl font-bold mb-4">Edit Data UMKM</h1>
+
     <form action="{{ route('umkm.update', $umkm->id) }}" method="POST" class="space-y-4">
         @csrf
         @method('PUT')
-        <input type="text" name="nama" value="{{ $umkm->nama }}" class="w-full border p-2 rounded" required>
-        <input type="text" name="pemilik" value="{{ $umkm->pemilik }}" class="w-full border p-2 rounded" required>
-        <input type="text" name="kategori" value="{{ $umkm->kategori }}" class="w-full border p-2 rounded" required>
-        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Update</button>
+        <div>
+            <label class="form-label">Nama</label>
+            <input type="text" name="nama" class="form-input" value="{{ $umkm->nama }}" required>
+        </div>
+        <div>
+            <label class="form-label">Pemilik</label>
+            <input type="text" name="pemilik" class="form-input" value="{{ $umkm->pemilik }}" required>
+        </div>
+        <div>
+            <label class="form-label">Kategori</label>
+            <input type="text" name="kategori" class="form-input" value="{{ $umkm->kategori }}" required>
+        </div>
+        <button type="submit" class="btn-primary">Update</button>
+        <a href="{{ route('umkm.index') }}" class="btn">Batal</a>
     </form>
 @endsection
